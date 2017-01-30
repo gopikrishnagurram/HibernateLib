@@ -227,7 +227,7 @@ public class CRUDTest {
 	}
 	private boolean isRecordExist(Table table,int pk)
 	{
-		String sql = "select * from " + table.getName() + " as e where"+getPkName(table)+" =:pk";
+		String sql = "select * from " + table.getName() + " as e where "+getPkName(table)+" =:pk";
 		Object obj = session.createSQLQuery(sql).setParameter("pk", pk).uniqueResult();
 		return (obj==null) ? false : true;
 	}
