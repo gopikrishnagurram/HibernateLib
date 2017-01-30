@@ -223,9 +223,11 @@ public class CRUDTest {
 	public boolean isRecordInserted(Class<?> className, int primaryKey) {
 		return isRecordExist(getTable(className.getName()), primaryKey);
 	}
+	
+	private boolean isRecordExist(Table table,int pk)
+	{
+		String sql = "select * from " + table.getName() + " as e where "+getPkName(table)+" =:pk";
 
-	private boolean isRecordExist(Table table, int pk) {
-		String sql = "select * from " + table.getName() + " as e where " + getPkName(table) + " =:pk";
 		Object obj = session.createSQLQuery(sql).setParameter("pk", pk).uniqueResult();
 		return (obj == null) ? false : true;
 	}
