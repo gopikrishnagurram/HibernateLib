@@ -169,7 +169,7 @@ public class CRUDTest {
 
 	public boolean isRecordDeleted(Class<?> className, int primaryKey) {
 		
-		return !isRecordExist(getTableName(className.getName()), primaryKey);
+		return !isRecordExist(getTable(className.getName()), primaryKey);
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class CRUDTest {
 	 * @return boolean
 	 */
 	public boolean isRecordDeleted(String entityName, int primaryKey) {
-		return !isRecordExist(getTableName(entityName), primaryKey);
+		return !isRecordExist(getTable(entityName), primaryKey);
 	}
 
 	/**
@@ -223,13 +223,17 @@ public class CRUDTest {
 	 * @return boolean
 	 */
 	public boolean isRecordInserted(Class<?> className, int primaryKey) {
-		return isRecordExist(getTableName(className.getName()), primaryKey);
+		return isRecordExist(getTable(className.getName()), primaryKey);
 	}
-	private boolean isRecordExist(String tableName,int pk)
+	private boolean isRecordExist(Table table,int pk)
 	{
-		String sql = "select * from " + tableName + " as e where id=:pk";
+		String sql = "select * from " + table.getName() + " as e where"+getPkName(table)+" =:pk";
 		Object obj = session.createSQLQuery(sql).setParameter("pk", pk).uniqueResult();
 		return (obj==null) ? false : true;
+	}
+	@SuppressWarnings("unused")
+	private String getPkName(Table className){
+		return table.getColumn(1).getName();
 	}
 
 	/**
@@ -241,7 +245,7 @@ public class CRUDTest {
 	 */
 
 	public boolean isRecordInserted(String entityName, int primaryKey) {
-		return isRecordExist(getTableName(entityName), primaryKey);
+		return isRecordExist(getTable(entityName), primaryKey);
 	}
 
 	/**
@@ -256,7 +260,7 @@ public class CRUDTest {
 	public boolean[] isRecordsInserted(Class<?> className, int[] primaryKeys) {
 		boolean[] result = new boolean[primaryKeys.length];
 		for (int i = 0; i < primaryKeys.length; i++) {
-			result[i] = isRecordExist(getTableName(className.getName()), primaryKeys[i]);
+			result[i] = isRecordExist(getTable(className.getName()), primaryKeys[i]);
 		}
 		return result;
 	}
@@ -273,7 +277,7 @@ public class CRUDTest {
 	public boolean[] isRecordsInserted(String entityName, int[] primaryKeys) {
 		boolean[] result = new boolean[primaryKeys.length];
 		for (int i = 0; i < primaryKeys.length; i++) {
-			result[i] = isRecordExist(getTableName(entityName), primaryKeys[i]);
+			result[i] = isRecordExist(getTable(entityName), primaryKeys[i]);
 		}
 		return result;
 	}
