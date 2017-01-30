@@ -1,11 +1,11 @@
 package com.wavelabs.tableoperations;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hibernate.mapping.Column;
@@ -22,7 +22,6 @@ import org.hibernate.type.Type;
 
 public class CRUDTest {
 
-
 	private Session session = null;
 	private SessionFactory factory = null;
 	private PersistentClass pc = null;
@@ -38,7 +37,6 @@ public class CRUDTest {
 	public void setSession(Session session) {
 		this.session = session;
 	}
-
 
 	/**
 	 * this method will get the persistentClass reference
@@ -137,7 +135,7 @@ public class CRUDTest {
 	 */
 	public boolean isColumnUpdated(Class<?> className, String propertyName, Object updatedValue, int primaryKey) {
 		intillization(className.getName());
-		return  (updatedValue.equals(getValue(className, primaryKey, propertyName))) ? true : false;
+		return (updatedValue.equals(getValue(className, primaryKey, propertyName))) ? true : false;
 	}
 
 	/**
@@ -153,7 +151,7 @@ public class CRUDTest {
 	public boolean isColumnUpdated(String entityName, String propertyName, Object updatedValue, int primaryKey) {
 
 		intillization(entityName);
-		return  (updatedValue==getValue(entityName, primaryKey, propertyName)) ? true : false;
+		return (updatedValue == getValue(entityName, primaryKey, propertyName)) ? true : false;
 
 	}
 
@@ -168,7 +166,7 @@ public class CRUDTest {
 	 */
 
 	public boolean isRecordDeleted(Class<?> className, int primaryKey) {
-		
+
 		return !isRecordExist(getTable(className.getName()), primaryKey);
 	}
 
@@ -225,14 +223,15 @@ public class CRUDTest {
 	public boolean isRecordInserted(Class<?> className, int primaryKey) {
 		return isRecordExist(getTable(className.getName()), primaryKey);
 	}
-	private boolean isRecordExist(Table table,int pk)
-	{
-		String sql = "select * from " + table.getName() + " as e where"+getPkName(table)+" =:pk";
+
+	private boolean isRecordExist(Table table, int pk) {
+		String sql = "select * from " + table.getName() + " as e where " + getPkName(table) + " =:pk";
 		Object obj = session.createSQLQuery(sql).setParameter("pk", pk).uniqueResult();
-		return (obj==null) ? false : true;
+		return (obj == null) ? false : true;
 	}
-	@SuppressWarnings("unused")
-	private String getPkName(Table className){
+
+	
+	private String getPkName(Table table) {
 		return table.getColumn(1).getName();
 	}
 
@@ -282,7 +281,6 @@ public class CRUDTest {
 		return result;
 	}
 
-
 	/**
 	 * this method will print all the columns from Table as a String[] format
 	 * 
@@ -312,9 +310,9 @@ public class CRUDTest {
 
 	public String getColumnName(Class<?> className, int colNoInOrder) {
 		intillization(className.getName());
-		return  table.getColumn(colNoInOrder).getName();
+		return table.getColumn(colNoInOrder).getName();
 	}
-	
+
 	/**
 	 * it will prints the all property types in the form of Type[] in order of
 	 * properties
@@ -352,20 +350,20 @@ public class CRUDTest {
 	 */
 
 	public Object getValue(@SuppressWarnings("rawtypes") Class className, int primaryKey, String propertyName) {
-		
+
 		return giveValue(className.getName(), propertyName, primaryKey);
 	}
+
 	public Object getValue(String entityName, int primaryKey, String propertyName) {
 
 		return giveValue(entityName, propertyName, primaryKey);
 	}
-	
-	private Object giveValue(String className,String propertyName,int primaryKey)
-	{
+
+	private Object giveValue(String className, String propertyName, int primaryKey) {
 		Table table = getTable(className);
 		String pkname = table.getColumn(1).getName();
-		Query query = session.createSQLQuery(
-				"select " + new Column(propertyName).getName() + " from " + table.getName() + " where " + pkname + "=" + primaryKey);
+		Query query = session.createSQLQuery("select " + new Column(propertyName).getName() + " from " + table.getName()
+				+ " where " + pkname + "=" + primaryKey);
 		return query.uniqueResult();
 	}
 
