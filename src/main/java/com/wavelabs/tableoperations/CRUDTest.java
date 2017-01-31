@@ -151,7 +151,7 @@ public class CRUDTest {
 	public boolean isColumnUpdated(String entityName, String propertyName, Object updatedValue, int primaryKey) {
 
 		intillization(entityName);
-		return (updatedValue == getValue(entityName, primaryKey, propertyName)) ? true : false;
+		return (updatedValue.equals(getValue(entityName, primaryKey, propertyName))) ? true : false;
 
 	}
 
