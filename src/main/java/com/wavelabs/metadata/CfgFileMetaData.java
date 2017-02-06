@@ -54,7 +54,7 @@ public class CfgFileMetaData {
 	 *         returns null.
 	 */
 	public String gethbm2AutoDdl() {
-		return mapOfProperties.get("hbm2auto.ddl").getStringValue().trim();
+		return mapOfProperties.get("hibernate.hbm2auto.ddl").getStringValue().trim();
 	}
 
 	/**
@@ -84,10 +84,10 @@ public class CfgFileMetaData {
 	/**
 	 * Return the dialect used in cfg file
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public String getDialect() {
-		return mapOfProperties.get("dialect").getStringValue().trim();
+		return mapOfProperties.get("hibernate.dialect").getStringValue().trim();
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class CfgFileMetaData {
 	 * @return password mentioned in cfg file
 	 */
 	public String getPassword() {
-		return mapOfProperties.get("connection.password").getStringValue().trim();
+		return mapOfProperties.get("hibernate.connection.password").getStringValue().trim();
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class CfgFileMetaData {
 	 * @return username mentioned in cfg file
 	 */
 	public String getUserName() {
-		return mapOfProperties.get("connection.username").getStringValue().trim();
+		return mapOfProperties.get("hibernate.connection.username").getStringValue().trim();
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class CfgFileMetaData {
 	 * @return name of url given in cfg file
 	 */
 	public String getConnectionUrl() {
-		return mapOfProperties.get("connection.url").getStringValue().trim();
+		return mapOfProperties.get("hibernate.connection.url").getStringValue().trim();
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class CfgFileMetaData {
 	 * @return name of driver_class used in cfg file.
 	 */
 	public String getDriverName() {
-		return mapOfProperties.get("connection.driver_class").getStringValue().trim();
+		return mapOfProperties.get("hibernate.connection.driver_class").getStringValue().trim();
 	}
 
 	/**
