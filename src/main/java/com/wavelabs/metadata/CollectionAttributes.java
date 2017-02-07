@@ -9,7 +9,7 @@ package com.wavelabs.metadata;
 
 public enum CollectionAttributes {
 
-	cascade("cascade"), inverse("inverse"), lazy("lazy"), fetch("fetch"), batchsize("batch-size"), access(
+	sname("name"),cascade("cascade"), inverse("inverse"), lazy("lazy"), fetch("fetch"), batchsize("batch-size"), access(
 			"access"), catalog("catalog"), check("check"), collectiontype("collection-type"), embedxml(
 					"embed-xml"), mutable("mutable"), node("node"), optimisticlock("optimistic-lock"), orderby(
 							"order-by"), outerjoin("outer-join"), persister("persister"), schema(

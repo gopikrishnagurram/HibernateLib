@@ -54,7 +54,7 @@ public class CfgFileMetaData {
 	 *         returns null.
 	 */
 	public String gethbm2AutoDdl() {
-		return mapOfProperties.get("hibernate.hbm2auto.ddl").getStringValue().trim();
+		return mapOfProperties.get("hibernate.hbm2ddl.auto").getStringValue().trim();
 	}
 
 	/**
